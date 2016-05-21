@@ -45,7 +45,9 @@ Prerequisites: [Node.js](https://nodejs.org/en/) (version 4 or later) needs to b
 
 Step 1: Download the code from [here](https://github.com/training4developers/react_05232016/archive/master.zip).  Extract the zip file.
 
-Step 2: From the terminal, change to the extracted zip file folder.
+Step 2: Open a terminal, change to the extracted zip file folder.
+
+On Windows, the terminal is called "Node.js Command Prompt". This will command prompt will contain the proper paths for Node.js development. DO NOT RUN the Node.js program. Click the icon named "Node.js Command Prompt". For Mac users, the Mac terminal is all you need.
 
 Step 3: From the terminal, run the following commands:
 
