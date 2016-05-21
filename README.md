@@ -7,8 +7,8 @@ Eric Greene - [http://t4d.io](http://t4d.io) - [LinkedIn](https://www.linkedin.c
 ## Schedule
 
 Class:
-- Wednesday - 1:30pm to 5pm
-- Thursday & Friday - 9am to 5pm
+- Monday & Tuesday - 9am to 5pm
+- Wednesday - 9am to 12:30pm
 
 Breaks:
 - Morning: 10:25am - 10:35am
@@ -52,7 +52,7 @@ Step 3: From the terminal, run the following commands:
 ```bash
 $ npm i
 
-$ npm i -g gulp eslint eslint-plugin-react webpack babel-cli babel-eslint
+$ npm i -g gulp-cli eslint eslint-plugin-react webpack babel-eslint
 
 $ gulp
 ```
