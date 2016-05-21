@@ -41,11 +41,11 @@ Breaks:
 
 ## Setup Instructions
 
-Prerequisites: [Node.js](https://nodejs.org/en/) (version 4 or later) and [Git](https://git-scm.com/) need to be installed, if they are not already
+Prerequisites: [Node.js](https://nodejs.org/en/) (version 4 or later) needs to be installed.
 
-Step 1: Using Git, clone the class repository: https://github.com/training4developers/react_05112016.git
+Step 1: Download the code from [here](https://github.com/training4developers/react_05232016/archive/master.zip).  Extract the zip file.
 
-Step 2: From the terminal, change to the repository folder.
+Step 2: From the terminal, change to the extracted zip file folder.
 
 Step 3: From the terminal, run the following commands:
 
