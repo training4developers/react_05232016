@@ -11,7 +11,27 @@
 
 	<body>
 		<main></main>
+
+		<!-- <input type="text" id="message" value="Ruby Tuesday"><button>Click Me!</button> -->
+		<button>Click Me!</button>
 		<script src="js/index.js"></script>
+		<script>
+
+			document
+				.querySelector('button')
+				.addEventListener('click', function() {
+
+					console.log(window.componentState);
+
+
+					console.log('value', document.querySelector('#message').value);
+					console.log('attribute value', document.querySelector('#message').getAttribute('value'));
+
+
+				});
+
+
+		</script>
 	</body>
 
 </html>
