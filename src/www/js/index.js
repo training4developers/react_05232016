@@ -3,60 +3,58 @@ import ReactDOM from 'react-dom';
 
 const colors = ['red','gold','green','white','saffron','blue'];
 
+const VIEW_LIST = 'list';
+const VIEW_FORM = 'form';
+
 class ItemApp extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			currentView: VIEW_LIST,
 			items: props.items.concat()
 		};
 		this.itemAppAddItem = this.itemAppAddItem.bind(this);
+		this.addItem = this.addItem.bind(this);
 	}
 
 	itemAppAddItem(newItem) {
 		this.setState({
-			items: this.state.items.concat(newItem)
+			items: this.state.items.concat(newItem),
+			currentView: VIEW_LIST
+		});
+	}
+
+	addItem() {
+		this.setState({
+			currentView: VIEW_FORM
 		});
 	}
 
 	render() {
+		switch(this.state.currentView) {
+			case VIEW_FORM:
+				return <ItemForm itemFormAddItem={this.itemAppAddItem} />;
+			default:
+				return <ItemList items={this.state.items} addItem={this.addItem} />;
+		}
 
-		return <div>
-			<ItemList items={this.state.items} />
-			<ItemForm itemFormAddItem={this.itemAppAddItem} />
-		</div>
+
 
 
 	}
 
 }
 
-// class ItemList extends React.Component {
-//
-// 	static get propTypes() {
-// 		return {
-// 			items: React.PropTypes.array.isRequired
-// 		};
-// 	}
-//
-// 	render() {
-//
-// 		return <ul>
-// 			{this.props.items.map(item => <li key={item}>{item}</li>)}
-// 		</ul>;
-// 	}
-//
-// }
+const ItemList = props => {
 
-const ItemList = props => <ul>
-	{props.items.map(item => <li key={item}>{item}</li>)}
-</ul>;
-
-// function ItemList(props) {
-// 	return <ul>
-// 		{this.props.items.map(item => <li key={item}>{item}</li>)}
-// 	</ul>;
-// }
+	return <div>
+		<ul>
+			{props.items.map(item => <li key={item}>{item}</li>)}
+		</ul>
+		<button type='button' onClick={props.addItem}>Add Item</button>
+	</div>;
+};
 
 class ItemForm extends React.Component {
 
