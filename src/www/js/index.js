@@ -3,20 +3,70 @@ import ReactDOM from 'react-dom';
 
 const colors = ['red','gold','green','white','saffron','blue'];
 
-window.componentState = null;
-
-class HelloWorld extends React.Component {
+class ItemApp extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			newColor: 'black',
 			items: props.items.concat()
 		};
-		this.onChange = this.onChange.bind(this);
-		this.addColor = this.addColor.bind(this);
+		this.itemAppAddItem = this.itemAppAddItem.bind(this);
+	}
 
-		console.dir(this);
+	itemAppAddItem(newItem) {
+		this.setState({
+			items: this.state.items.concat(newItem)
+		});
+	}
+
+	render() {
+
+		return <div>
+			<ItemList items={this.state.items} />
+			<ItemForm itemFormAddItem={this.itemAppAddItem} />
+		</div>
+
+
+	}
+
+}
+
+// class ItemList extends React.Component {
+//
+// 	static get propTypes() {
+// 		return {
+// 			items: React.PropTypes.array.isRequired
+// 		};
+// 	}
+//
+// 	render() {
+//
+// 		return <ul>
+// 			{this.props.items.map(item => <li key={item}>{item}</li>)}
+// 		</ul>;
+// 	}
+//
+// }
+
+const ItemList = props => <ul>
+	{props.items.map(item => <li key={item}>{item}</li>)}
+</ul>;
+
+// function ItemList(props) {
+// 	return <ul>
+// 		{this.props.items.map(item => <li key={item}>{item}</li>)}
+// 	</ul>;
+// }
+
+class ItemForm extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			newItem: ''
+		};
+		this.onChange = this.onChange.bind(this);
+		this.addItem = this.addItem.bind(this);
 	}
 
 	onChange(e) {
@@ -25,42 +75,23 @@ class HelloWorld extends React.Component {
 		});
 	}
 
-	addColor() {
-		const colors = this.state.items.concat(this.state.newColor);
-		this.setState({
-			items: colors
-		});
+	addItem() {
+		this.props.itemFormAddItem(this.state.newItem);
 	}
 
 	render() {
-
-		window.componentState = this.state;
-
-		// const items = [];
-		//
-		// this.props.items.forEach(function(item) {
-		// 	items.push(<li key={item}>{item}</li>);
-		// });
-
-		return <div>
-			<h1>Hello World!</h1>
-			<ul>
-				{this.state.items.map(item => <li key={item}>{item}</li>)}
-			</ul>
-			<form>
-				<label>
-					New Color:
-					<input type='text' name='newColor'
-					value={this.state.newColor} onChange={this.onChange} />
-				</label>
-				<button type='button' onClick={this.addColor}>Add Color</button>
-			</form>
-		</div>;
-
-		//return React.createElement('h1', null, 'Hello World!') React.createElement('h1', null, 'Hello World!');
+		return <form>
+			<label>
+				New Item:
+				<input type='text' name='newItem'
+				value={this.state.newItem} onChange={this.onChange} />
+			</label>
+			<button type='button' onClick={this.addItem}>Add Item</button>
+		</form>;
 	}
 
 }
+
 
 const widgets = [
 	{ id: 1, name: 'Widget 1', description: 'A widget 1', color:'red', size: 'small', quantity: 2 },
@@ -72,23 +103,28 @@ class WidgetTable extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			newWidgetId: 0,
-			newWidgetName: '',
-			newWidgetDescription: '',
-			newWidgetColor: '',
-			newWidgetSize: '',
-			newWidgetQuantity: 0,
+			newWidget: {
+				id: 0,
+				name: '',
+				description: '',
+				color: '',
+				size: '',
+				quantity: 0
+			}
 		};
 		this.onChange = this.onChange.bind(this);
 	}
 
 	onChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value
+			newWidget: Object.assign({},
+				this.state.newWidget,
+				{ [e.target.name]: e.target.value })
 		});
 	}
 
 	render() {
+
 		return <div>
 			<table className='table table-striped'>
 				<thead>
@@ -116,49 +152,50 @@ class WidgetTable extends React.Component {
 				<div>
 					<label>
 						Widget Id:
-						<input type='text' name='newWidgetId'
-						value={this.state.newWidgetId} onChange={this.onChange} />
+						<input type='text' name='id'
+						value={this.state.newWidget.id} onChange={this.onChange} />
 					</label>
 				</div>
 				<div>
 					<label>
 						Widget Name:
-						<input type='text' name='newWidgetName'
-						value={this.state.newWidgetName} onChange={this.onChange} />
+						<input type='text' name='name'
+						value={this.state.newWidget.name} onChange={this.onChange} />
 					</label>
 				</div>
 				<div>
 					<label>
 						Widget Description:
-						<input type='text' name='newWidgetDescription'
-						value={this.state.newWidgetDescription} onChange={this.onChange} />
+						<input type='text' name='description'
+						value={this.state.newWidget.description} onChange={this.onChange} />
 					</label>
 				</div>
 				<div>
 					<label>
 						Widget Color:
-						<input type='text' name='newWidgetColor'
-						value={this.state.newWidgetColor} onChange={this.onChange} />
+						<input type='text' name='color'
+						value={this.state.newWidget.color} onChange={this.onChange} />
 					</label>
 				</div>
 				<div>
 					<label>
 						Widget Size:
-						<input type='text' name='newWidgetSize'
-						value={this.state.newWidgetSize} onChange={this.onChange} />
+						<input type='text' name='size'
+						value={this.state.newWidget.size} onChange={this.onChange} />
 					</label>
 				</div>
 				<div>
 					<label>
 						Widget Quantity:
-						<input type='text' name='newWidgetQuantity'
-						value={this.state.newWidgetQuantity} onChange={this.onChange} />
+						<input type='text' name='quantity'
+						value={this.state.newWidget.quantity} onChange={this.onChange} />
 					</label>
 				</div>
+				<button type='button'>Add Widget</button>
 			</form>
 		</div>;
 	}
 }
 
-ReactDOM.render(<HelloWorld items={colors} />,
+ReactDOM.render(<ItemApp items={colors} />,
 	document.querySelector('main'));
