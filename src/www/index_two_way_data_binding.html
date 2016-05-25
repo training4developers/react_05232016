@@ -13,14 +13,8 @@
 
 		<div ng-app="MyApp">
 			<div ng-controller="MyCtrl">
-				<ul>
-					<li ng-repeat="color in colors">{{color}}</li>
-				</ul>
-
-				<ul>
-					<li ng-repeat="car in cars"><b>{{car.make}}</b> - {{car.model}}</li>
-				</ul>
-
+				{{message}}<br>
+				<input ng-model="message">
 			</div>
 		</div>
 
@@ -28,14 +22,19 @@
 
 			angular.module("MyApp", [])
 				.controller("MyCtrl", function($scope) {
+					$scope.message = "Hi Class!";
 
-					$scope.colors = ['saffron','green','white','gold','red','blue'];
+					// $scope.$watch(function() {
+					// 	console.log("$digest loop executed");
+					//
+					// 	var count = 1000000000;
+					//
+					// 	while(count--) {
+					// 		var t = count;
+					// 	}
+					//
+					// });
 
-					$scope.cars = [
-						{ id: 1, make: 'Volkswagon', model: 'Beetle', year: 2015 },
-						{ id: 2, make: 'Toyota', model: 'Corolla', year: 1993 },
-						{ id: 3, make: 'Lexus', model: 'With a Bow', year: 2017 }
-					];
 
 				});
 
