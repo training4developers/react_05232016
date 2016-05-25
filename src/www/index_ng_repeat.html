@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to Introduction to JavaScript, React & Angular</title>
+		<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/site.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+
+				Color Filter: <input ng-model="colorFilter">
+
+				<ul>
+					<li ng-repeat="color in colors | filter:colorFilter | orderBy:'toString()':true">{{color}}</li>
+				</ul>
+
+				<form>
+
+					<label>New Color: <input type="text" ng-model="newColor"></label>
+					<button type="button" ng-click="addColor()">Add Color</button>
+
+				</form>
+
+				<ul>
+					<li ng-repeat="car in cars | orderBy:'year'"><b>{{car.make}}</b> - {{car.model}}</li>
+				</ul>
+
+			</div>
+		</div>
+
+		<script>
+
+			angular.module("MyApp", [])
+				.controller("MyCtrl", function($scope) {
+
+					$scope.colors = ['saffron','green','white','gold','red','blue','brown','black','purple'];
+
+					$scope.cars = [
+						{ id: 1, make: 'Volkswagon', model: 'Beetle', year: 2015 },
+						{ id: 2, make: 'Toyota', model: 'Corolla', year: 1993 },
+						{ id: 3, make: 'Lexus', model: 'With a Bow', year: 2017 }
+					];
+
+					$scope.addColor = function() {
+
+						//$scope.$apply(function() {
+							$scope.colors.push($scope.newColor);
+							console.log($scope.colors);
+						//});
+
+						//$scope.$digest();
+					}
+
+				});
+
+		</script>
+
+	</body>
+
+</html>

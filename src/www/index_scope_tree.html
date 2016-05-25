@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to Introduction to JavaScript, React & Angular</title>
+		<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/site.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+		<style>
+
+			div.ng-scope {
+				margin:5px;
+				padding:5px;
+				border: 2px solid chartreuse;
+			}
+
+		</style>
+	</head>
+
+	<body>
+
+		<div ng-app="MyApp">
+			{{$id}}<br>
+			{{message}}
+			<div ng-controller="MyCtrl">
+				{{$id}}
+			</div>
+			<div ng-controller="MyCtrl">
+				{{$id}}
+				<div ng-controller="MyCtrl">
+					{{$id}}<br>
+					{{message}}<br>
+					<button ng-click='showScope()'>Show Scope</button>
+				</div>
+				<div ng-controller="MyCtrl">
+					{{$id}}
+				</div>
+			</div>
+			<div ng-controller="MyCtrl">
+				{{$id}}
+			</div>
+			<div ng-controller="MyCtrl">
+				{{$id}}
+				<div ng-controller="MyCtrl">
+					{{$id}}
+				</div>
+			</div>
+		</div>
+
+		<script>
+
+			var counter = 0;
+
+			angular.module("MyApp", [])
+				.controller("MyCtrl", function($scope) {
+
+					console.log(++counter);
+
+					$scope.showScope = function() {
+						console.dir($scope);
+					};
+
+				})
+				.run(function($rootScope) {
+					$rootScope.message = 'Tomorrow will be a good day.';
+				});
+
+		</script>
+
+	</body>
+
+</html>

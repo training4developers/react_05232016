@@ -7,28 +7,38 @@
 		<link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/site.css" rel="stylesheet">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+		<style>
+
+			div.ng-scope {
+				margin:5px;
+				padding:5px;
+				border: 2px solid chartreuse;
+			}
+
+		</style>
 	</head>
 
 	<body>
 
 		<div ng-app="MyApp">
 			<div ng-controller="MyCtrl">
-
-				<input type='checkbox' ng-model='showMe'> Show Me
-
-				<div ng-if='showMe'>
-					You can see me.
-				</div>
-
+				{{message}}
 			</div>
 		</div>
 
 		<script>
 
-			angular.module("MyApp", [])
-				.controller("MyCtrl", function() {
+			myCtrl.$inject = ["$log","$scope"];
 
-				});
+			function myCtrl($log, $scope) {
+				$scope.message = "Alan loves lobsters";
+				$log.log($scope.message);
+			}
+
+			//console.log(myCtrl.toString());
+
+			angular.module("MyApp", [])
+				.controller("MyCtrl", myCtrl);
 
 		</script>
 
